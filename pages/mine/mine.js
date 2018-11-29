@@ -150,8 +150,8 @@ Page({
 
 
   logout: function () {
-    // var user = app.userInfo;
-    var user = app.getGlobalUserInfo();
+    var user = app.userInfo;
+    //var user = app.getGlobalUserInfo();
 
     var serverUrl = app.serverUrl;
     wx.showLoading({

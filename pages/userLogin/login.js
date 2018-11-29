@@ -59,17 +59,9 @@ Page({
             // fixme 修改原有的全局对象为本地缓存
             //app.setGlobalUserInfo(res.data.data);
             // 页面跳转
-
-            var redirectUrl = me.redirectUrl;
-            if (redirectUrl != null && redirectUrl != undefined && redirectUrl != '') {
-              wx.redirectTo({
-                url: redirectUrl,
-              })
-            } else {
-              wx.redirectTo({
-                url: '../mine/mine',
-              })
-            }
+            wx.navigateTo({
+              url: '../mine/mine',
+            })
             
           } else if (res.data.status == 500) {
             // 失败弹出框
@@ -85,7 +77,7 @@ Page({
   },
 
   goRegistPage:function() {
-    wx.redirectTo({
+    wx.navigateTo({
       url: '../userRegist/regist',
     })
   }
