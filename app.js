@@ -1,5 +1,5 @@
 //app.js
 App({
-  serverUrl: "https://8b2c2022.ngrok.io",
+  serverUrl: "http://192.168.1.12:8081",
   userInfo: null,
 })

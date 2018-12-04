@@ -1,5 +1,3 @@
-var videoUtil = require('../../utils/videoUtil.js')
-
 const app = getApp()
 
 Page({
@@ -37,7 +35,7 @@ Page({
 
     // var user = app.userInfo;
     // fixme 修改原有的全局对象为本地缓存
-    var user = app.getGlobalUserInfo();
+    var user = app.userInfo;
     var userId = user.id;
 
     var publisherId = params.publisherId;
@@ -60,12 +58,10 @@ Page({
     var serverUrl = app.serverUrl;
     // 调用后端
     wx.request({
-      url: serverUrl + '/user/query?userId=' + userId + "&fanId=" + user.id,
+      url: serverUrl + '/query?userId=' + userId,
       method: "POST",
       header: {
-        'content-type': 'application/json', // 默认值
-        'headerUserId': user.id,
-        'headerUserToken': user.userToken
+        'content-type': 'application/json' // 默认值
       },
       success: function (res) {
         console.log(res.data);
@@ -201,16 +197,15 @@ Page({
         })
         var serverUrl = app.serverUrl;
         // fixme 修改原有的全局对象为本地缓存
-        var userInfo = app.getGlobalUserInfo();
+        //var userInfo = app.getGlobalUserInfo();
 
         wx.uploadFile({
-          url: serverUrl + '/user/uploadFace?userId=' + userInfo.id,  //app.userInfo.id,
+          url: serverUrl + '/uploadFace?userId=' + app.userInfo.id,  //app.userInfo.id,
           filePath: tempFilePaths[0],
           name: 'file',
           header: {
             'content-type': 'application/json', // 默认值
-            'headerUserId': userInfo.id,
-            'headerUserToken': userInfo.userToken
+            'headerUserId': app.userInfo.id
           },
           success: function (res) {
             var data = JSON.parse(res.data);
@@ -223,6 +218,7 @@ Page({
               });
 
               var imageUrl = data.data;
+              console.log(serverUrl+imageUrl);
               me.setData({
                 faceUrl: serverUrl + imageUrl
               });
@@ -270,9 +266,9 @@ Page({
         var tmpVideoUrl = res.tempFilePath;
         var tmpCoverUrl = res.thumbTempFilePath;
 
-        if (duration > 11) {
+        if (duration > 121) {
           wx.showToast({
-            title: '视频长度不能超过10秒...',
+            title: '视频长度不能超过2分钟...',
             icon: "none",
             duration: 2500
           })

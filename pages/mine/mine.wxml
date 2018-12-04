@@ -3,7 +3,7 @@
   <view class='container'>
 
   
-      <image src="../resource/images/noneface.png" class="face" bindtap='changeFace'></image>
+      <image src="{{faceUrl}}" class="face" bindtap='changeFace'></image>
     
     <label class='nickname'>{{nickname}}</label>
 
